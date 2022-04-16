@@ -5314,6 +5314,14 @@ html [class*='section-'].section-bottom-0 {
 	padding-top: 0;
 }
 
+.bg-white-smoke-100 {
+	background-color: #f4f4f4;
+}
+
+.bg-white-smoke-100:not([style*="background-"]) + .bg-white-smoke-100:not([style*="background-"]) {
+	padding-top: 0;
+}
+
 .bg-gray-800 {
 	background-color: #31404a;
 }
@@ -7211,6 +7219,7 @@ html.rd-navbar-fixed-linked .page {
 
 .rd-navbar-static-linked .rd-navbar-bg {
 	height: 77px;
+	margin-top: 105px;
 }
 
 @media (min-width: 1600px) {
@@ -8612,6 +8621,8 @@ html.rd-navbar-fixed-linked .page {
 
 .owl-carousel .owl-stage {
 	position: relative;
+	display: flex;
+	align-items: center;
 	-ms-touch-action: pan-Y;
 	touch-action: manipulation;
 	-moz-backface-visibility: hidden;
