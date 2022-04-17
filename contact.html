@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="origin">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
@@ -103,7 +104,7 @@
             </div>
             <div class="col-md-6 col-xl-6">
               <h5>Escríbenos un mensaje</h5>
-              <form class="rd-form rd-mailform" action="https://formspree.io/f/xayvpaon" method="POST">
+              <form id="contact-form" class="rd-form rd-mailform" action="https://formspree.io/f/xayvpaon" method="POST">
                 <div class="row row-10">
                   <div class="col-md-6">
                     <div class="form-wrap">
@@ -130,7 +131,7 @@
                     </div>
                   </div>
                   <div class="col-md-5 col-xl-4">
-                    <button class="button button-size-1 button-block button-primary" type="submit">Send</button>
+                    <button id="button-submit" class="button button-size-1 button-block button-primary" type="submit">Enviar</button>
                   </div>
                 </div>
               </form>
@@ -217,7 +218,45 @@
         </div>
       </footer>
     </div>
+    <script src="js/sweetalert2.all.min.js"></script>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
+
+    <script>
+
+      let form = document.getElementById('contact-form')
+
+      const submitContactForm = (e) => {
+        e.preventDefault()
+
+        let validationResults = regula.validate()
+        if(validationResults.length > 0) return
+
+        document.getElementById('button-submit').disabled = true
+        let data = new FormData(form)
+        let url = form.getAttribute("action")
+
+        fetch(url, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then(response => {
+          if(response.ok) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Se ha enviado correctamente.',
+            }).then( response => form.reset())
+          }
+        }).catch(error => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Ha ocurrido un error, inténtelo más tarde.',
+          }).then( response => window.location.reload())
+        })
+      }
+
+      form.addEventListener("submit", submitContactForm, true)
+
+    </script>
   </body>
 </html>
