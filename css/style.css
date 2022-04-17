@@ -2320,6 +2320,21 @@ h5 + .list-ordered {
 	margin-top: 25px;
 }
 
+.check-ul-list {
+	margin-top: 15px;	
+}
+
+.check-ul-list li {
+	font-size: 16px;
+	padding-left: 35px;
+}
+
+.check-ul-list li:before {
+	content: url('../img/check.png');
+	position: absolute;
+	left: 20px;
+}
+
 /** @section Images */
 img {
 	display: inline-block;
